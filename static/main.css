@@ -58,9 +58,7 @@ header {
 }
 header h1{
   font-size: 30px;
-  position: absolute;
-  top:150px;
-  left:340px;
+  margin: 0;
   color:white;
 
 }
@@ -106,18 +104,19 @@ nav li {
   margin-right: 20px;
   list-style: none;
 }
- .avatar {
-          content: '';
-          display: inline-block;
-          vertical-align: middle;
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-          background: url('http://1.viki.io/a/ph/avatar_profile-acc6c5a5a9d35bd7d292dfd776cfec76.png?s=30x30&f=t&cb=1');
-          background-size: 100%;
-          margin: 10px 15px;
-          cursor:pointer;
-        }
+
+.avatar {
+ content: '';
+ display: inline-block;
+ vertical-align: middle;
+ width: 30px;
+ height: 30px;
+ border-radius: 50%;
+ background: url("https://th.bing.com/th/id/R.868ee108a368c111e1eeee70bb568c59?rik=6V3nm%2f9nyUWEYg&pid=ImgRaw&r=0");
+ background-size: cover;
+ margin: 10px 15px;
+ cursor:pointer;
+}
 
 form {
   max-width: 600px;
@@ -160,11 +159,13 @@ form input[type="submit"] {
 form input[type="submit"]:hover {
   background-color: #0c84c8;
 }
+
 form input:focus,form textarea:focus {
   outline: none;
   border-color: #1da1f2;
   box-shadow: 0px 0px 5px rgba(29, 161, 242, 0.5);
 }
+
 form input:focus,form textarea:focus {
   outline: none;
   border-color: #1da1f2;
@@ -193,8 +194,6 @@ form input:focus,form textarea:focus {
   cursor: pointer;
 }
 
-
-
 .search button:hover{
     background-color: #005ea6;
 }
@@ -221,5 +220,50 @@ form input:focus,form textarea:focus {
   text-align: center;
  
 }
-
-
+/* For screens smaller than 768px (i.e., mobile devices) */
+@media (max-width: 767px) {
+    nav {
+      flex-direction: column;
+      height: auto;
+    }
+  
+    nav ul {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    nav li {
+      font-size:25px;
+      margin: 0;
+      border-bottom: 1px solid #e6ecf0;
+    }
+  
+    .avatar {
+      margin: 10px auto;
+    }
+  
+    .search {
+      display: none;
+    }
+    
+    nav a {
+      margin: 10px;
+    }
+    header {
+        margin-top:160px;
+        padding: 40px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+      }
+      
+      header h1 {
+        font-size: 25px;
+        position: absolute;
+        top: 250px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+  }
+  
+  
