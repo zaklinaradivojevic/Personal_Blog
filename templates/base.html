@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %} - My Blog</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+</head>
+<body>
+<nav>
+  <ul>
+    <li><a href="{{ url_for('home') }}">Home</a></li>
+    <li><a href="{{ url_for('about') }}">About</a></li>
+    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+    <li><a href="{{ url_for('new_post') }}">New Post</a></li>
+    <li class="avatar"></li>
+  </ul> 
+  <div class="search">
+    <input type="text" name="q" placeholder="Search...">
+    <button type="submit"><i class="fa fa-search"></i></button>
+  </div>
+</nav>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
