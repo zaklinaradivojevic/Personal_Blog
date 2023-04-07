@@ -228,6 +228,32 @@ div.about {
   text-align: center;
  
 }
+.about_content {
+  width:50%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin:0 auto;
+}
+
+.about_content p {
+  font-size: 18px;
+  line-height: 1.5;
+  text-indent: 1em;
+}
+
+.about_content p::first-letter {
+  font-size: 2.5rem;
+  font-weight: bold;
+  float: left;
+  text-transform: uppercase;
+  text-indent: 20px;
+  color: #1da1f2;
+}
+
+
 /* For screens smaller than 768px (i.e., mobile devices) */
 @media (max-width: 767px) {
     nav {
