@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
    <div class="about">
-     <h1>Contact </h1>
-     <p>This is Contact page.</p>
-   </div>
+    <form>      
+      <input name="name" type="text" class="feedback-input" placeholder="Name" />   
+      <input name="email" type="text" class="feedback-input" placeholder="Email" />
+      <textarea name="text" class="feedback-input" placeholder="Comment"></textarea>
+      <input type="submit" value="SUBMIT"/>
+    </form>
+      </div>
  {% endblock %}
