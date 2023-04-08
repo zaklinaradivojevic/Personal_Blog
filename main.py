@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from werkzeug.security import check_password_hash
 import sqlite3
+
 app = Flask(__name__)
 app.secret_key = 'secret_key'
 
@@ -56,6 +57,10 @@ def login():
 
     return render_template('login.html')
 
+@app.route('/search')
+def search():
+    # Your code here
+    return render_template('search.html')
 
 
 
