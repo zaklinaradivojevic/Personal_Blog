@@ -1,5 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask_login import login_user, logout_user, current_user, login_required
+from flask import Flask, render_template, request, flash, redirect, url_for
+
 from werkzeug.security import check_password_hash
+from models import db, User
+
+
+
 import sqlite3
 
 app = Flask(__name__)
@@ -41,23 +47,21 @@ def login():
         username = request.form['username']
         password = request.form['password']
 
-        conn = sqlite3.connect('database.db')
-        c = conn.cursor()
-        c.execute('''SELECT * FROM users WHERE username = ?''', (username,))
-        user = c.fetchone()
+        # Get user from the database by username
+        user = User.query.filter_by(username=username).first()
 
-        if user is not None and check_password_hash(user[2], password):
-            session['username'] = username
-            conn.close()
+        # Check if the user exists and the password is correct
+        if user and check_password_hash(user.password, password):
+            # Log the user in and redirect to the home page
+            login_user(user)
+            flash('Logged in successfully.', 'success')
             return redirect(url_for('home'))
-        else:
-            error = 'Invalid username or password.'
-            conn.close()
-            return render_template('login.html', error=error)
 
+        # If the user doesn't exist or the password is incorrect, show an error message
+        flash('Invalid username or password.', 'error')
+
+    # Render the login form
     return render_template('login.html')
-
-
 
 
 app.run(debug=True, host='0.0.0.0', port=8080)

@@ -1,21 +1,26 @@
 import sqlite3
-from werkzeug.security import generate_password_hash, check_password_hash
 
+import flask
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
+
+# Create a connection to the database
 conn = sqlite3.connect('database.db')
-c = conn.cursor()
 
-# Create users table if it doesn't exist
-c.execute('''CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                username TEXT NOT NULL UNIQUE,
-                password TEXT NOT NULL
-            )''')
+# Open the schema.sql file and read the SQL commands
+with open('schema.sql', 'r') as f:
+    schema = f.read()
 
-# Add a test user
-test_username = 'testuser'
-test_password = 'testpassword'
-hashed_password = generate_password_hash(test_password)
-c.execute('''INSERT OR IGNORE INTO users (username, password) VALUES (?, ?)''', (test_username, hashed_password))
+# Execute the SQL commands to create the tables
+conn.executescript(schema)
 
-conn.commit()
+# Close the connection to the database
 conn.close()
+
+app = Flask(__name__)
+app.secret_key = 'secret_key'
+
+# Initialize the database
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+db.init_app(app)
