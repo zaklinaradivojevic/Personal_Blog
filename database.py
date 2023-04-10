@@ -1,10 +1,13 @@
 import sqlite3
-
 from flask import Flask
-
 from flask_sqlalchemy import SQLAlchemy
 
-db = SQLAlchemy()
+app = Flask(__name__)
+app.secret_key = 'secret_key'
+
+# Initialize the database
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+db = SQLAlchemy(app)
 
 # Create a connection to the database
 conn = sqlite3.connect('database.db')
@@ -19,9 +22,4 @@ conn.executescript(schema)
 # Close the connection to the database
 conn.close()
 
-app = Flask(__name__)
-app.secret_key = 'secret_key'
-
-# Initialize the database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db.init_app(app)
