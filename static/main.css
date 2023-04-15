@@ -328,7 +328,7 @@ div.about {
       margin: 10px;
     }
     header {
-        margin-top:160px;
+        margin-top:260px;
         padding: 40px;
         display: flex;
         justify-content: flex-start;
@@ -338,7 +338,7 @@ div.about {
       header h1 {
         font-size: 25px;
         position: absolute;
-        top: 250px;
+        top: 320px;
         left: 50%;
         transform: translateX(-50%);
       }
