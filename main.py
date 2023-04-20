@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user
+from flask_login import current_user
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite"
@@ -27,10 +28,12 @@ with app.app_context():
 def loader_user(user_id):
     return Users.query.get(user_id)
  
- 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    username = None
+    if current_user.is_authenticated:
+        username = current_user.username
+    return render_template('home.html', username=username)
   
 @app.route('/about')
 def about():
@@ -69,20 +72,28 @@ def login():
         # (we'll create the home route in a moment)
     return render_template("login.html")
 
+
+
 @app.route('/register', methods=["GET", "POST"])
 def register():
-  # If the user made a POST request, create a new user
     if request.method == "POST":
-        user = Users(username=request.form.get("username"),
-                     password=request.form.get("password"))
-        # Add the user to the database
-        db.session.add(user)
-        # Commit the changes made
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        # Check if the username already exists in the database
+        user = Users.query.filter_by(username=username).first()
+        if user:
+            flash('Username already exists. Please choose a different one.', 'danger')
+            return redirect(url_for("register"))
+
+        # Create a new user object and add it to the database
+        new_user = Users(username=username, password=password)
+        db.session.add(new_user)
         db.session.commit()
-        # Once user account created, redirect them
-        # to login route (created later on)
+
+        flash('Account created successfully!', 'success')
         return redirect(url_for("login"))
-    # Renders sign_up template if user made a GET request
+
     return render_template("sign_in.html")
 
 @app.route("/logout")

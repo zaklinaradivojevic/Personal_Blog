@@ -264,31 +264,41 @@ div.about {
                3px 3px 5px blue;
  
 }
-.about_content {
-  width:50%;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin:0 auto;
+.newspaper {
+  margin: 0 auto;
+  width: 800px;
+  padding: 50px;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-.about_content p {
+.newspaper-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.newspaper-author {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.newspaper-date {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+hr {
+  margin-bottom: 30px;
+}
+
+.newspaper-paragraph {
   font-size: 18px;
   line-height: 1.5;
-  text-indent: 1em;
+  margin-bottom: 20px;
 }
 
-.about_content p::first-letter {
-  font-size: 2.5rem;
-  font-weight: bold;
-  float: left;
-  text-transform: uppercase;
-  text-indent: 20px;
-  color: #1da1f2;
-  font-family: 'Lobster';
-}
 
 .feedback-input {
   color:gray;

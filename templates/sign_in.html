@@ -2,7 +2,7 @@
 {% block content %}
 <div class="login">
 <h1 class="login-title">Create an account</h1>
-<form action="#" method="post">
+<form action="{{ url_for('register') }}" method="post">
   <div class="form-container">
   <label for="username">Username:</label>
   <input type="text" name="username" />
