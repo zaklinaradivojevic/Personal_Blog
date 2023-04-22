@@ -2,12 +2,27 @@
 {% block content %}
 <div class="login">
 <h1 class="login-title">Create an account</h1>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+    <div class="notification is-danger">
+        {{ messages[0] }}. Go to <a href="{{ url_for('login') }}">login page</a>.
+    </div>
+{% endif %}
+{% endwith %}
 <form action="{{ url_for('register') }}" method="post">
   <div class="form-container">
+  <label for="email">Email:</label>
+  <input class="input is-large" type="email" name="email" placeholder="Email" autofocus=""/>
   <label for="username">Username:</label>
   <input type="text" name="username" />
   <label for="password">Password:</label>
   <input type="password" name="password" />
+</div>
+<div class="field">
+  <label class="checkbox">
+      <input type="checkbox" name="remember">
+      Remember me
+  </label>
 </div>
   <button type="submit" class="login-btn">Submit</button>
 </form>

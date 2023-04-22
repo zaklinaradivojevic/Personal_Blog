@@ -17,15 +17,15 @@
       <li><a href="{{ url_for('about') }}">About</a></li>
       <li><a href="{{ url_for('new_post') }}">New Post</a></li>
       <li><a href="{{ url_for('contact') }}">Contact</a></li>
-      <li><a href="{{ url_for('logout') }}">Logout</a></li>
-      <li><a href="{{ url_for('register') }}">Register</a></li>
-      <li class="avatar"><i class="fa fa-avatar"></i></li>
-      {% if username %}
-  <li><a href="#">{{ username }}</a></li>
-{% else %}
-  <li><a href="{{ url_for('login') }}">Login</a></li>
-{% endif %}
-       </ul> 
+      <li class="avatar"></li>
+      {% if current_user.is_authenticated %}
+        <li><a  href="#">{{ username }}</a></li>
+        <li><a  href="{{ url_for('logout') }}">Logout</a></li>
+    {% else %}
+        <li> <a  href="{{ url_for('login') }}">Login</a></li>
+        <li><a  href="{{ url_for('register') }}">Register</a></li>
+    {% endif %}
+    </ul>
     <div class="search">
         <input type="text" name="q" placeholder="Search...">
         <button type="submit"><i class="fa fa-search"></i></button>

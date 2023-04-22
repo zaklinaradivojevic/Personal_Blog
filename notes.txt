@@ -1,0 +1,1 @@
+creating a blog-app from the book https://edu.anarcho-copy.org/Programming%20Languages/Python/mastering-flask-web-development-2nd.pdf
