@@ -1,17 +1,30 @@
-from flask import Flask, render_template, request, flash, redirect, url_for, flash,session
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
+from config import DevConfig
+import datetime
+from flask_migrate import Migrate
+
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite"
 app.config["SECRET_KEY"] = "abc"
+app.config.from_object(DevConfig)
 
 db = SQLAlchemy(app)
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    username = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(120), nullable=False)
+     __tablename__ = 'user_table_name'
+
+     id = db.Column(db.Integer, primary_key=True)
+     email = db.Column(db.String(255), unique=True, nullable=False)
+     username = db.Column(db.String(255), unique=True, nullable=False)
+     password = db.Column(db.String(255), nullable=False)
+
+def __init__(self, username):
+ self.username = username
+ 
+def __repr__(self):
+     return "<User '{}'>".format(self.username)
 
 with app.app_context():
     db.init_app(app)
@@ -36,11 +49,7 @@ def post(post_id):
 
 @app.route('/new_post', methods=['GET', 'POST'])
 def new_post():
-    if request.method == 'POST':
-        # Add new post to database
-        return 'Post added!'
-    else:
-        return render_template('new_post.html')
+    return render_template('new_post.html')
     
     
 @app.route('/login', methods=['GET', 'POST'])

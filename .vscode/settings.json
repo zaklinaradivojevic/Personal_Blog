@@ -3,5 +3,9 @@
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "python.formatting.provider": "none",
-  "spellchecker.ignoreWordsList": ["blog"]
+  "spellchecker.ignoreWordsList": [
+    "blog",
+    "venv",
+    "jinja2'"
+  ]
 }

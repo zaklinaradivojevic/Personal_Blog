@@ -1,1 +1,26 @@
 create a blog post from the book https://edu.anarcho-copy.org/Programming%20Languages/Python/mastering-flask-web-development-2nd.pdf
+
+chapter 1
+creating a project 
+creating  venv
+activating venv
+
+source venv/bin/activate 
+
+pip install -r requirements.txt
+
+This will allow us to work with our models in the Flask shell, because we are injecting. Run
+the shell now and use db.create_all() to create all of the tables, as shown in the
+following code:
+ # Tell Flask where to load our shell context
+ $ export FLASK_APP=manage.py
+ $ flask shell
+ >>> db.create_all()
+
+ first issue:
+ cannot import name 'Markup' from 'jinja2'
+ fixing :
+ pip install --upgrade jinja2
+pip uninstall jinja2
+pip install jinja2
+
