@@ -7,6 +7,8 @@ activating venv
 
 source venv/bin/activate 
 
+.venv\Scripts\activate.bat
+
 pip install -r requirements.txt
 
 This will allow us to work with our models in the Flask shell, because we are injecting. Run
