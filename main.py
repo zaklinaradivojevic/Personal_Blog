@@ -27,7 +27,7 @@ def __repr__(self):
      return "<User '{}'>".format(self.username)
 
 with app.app_context():
-    db.init_app(app)
+    
     db.create_all()
  
 
