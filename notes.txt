@@ -18,6 +18,8 @@ following code:
  $ export FLASK_APP=manage.py
  $ flask shell
  >>> db.create_all()
+$ sqlite3 database.db .tables
+
 
  first issue:
  cannot import name 'Markup' from 'jinja2'
@@ -26,3 +28,31 @@ following code:
 pip uninstall jinja2
 pip install jinja2
 
+To initialize the Migrate object with our app and our SQLAlchemy instance, run the
+following code:
+# Tell Flask where is our app
+set FLASK_APP=main.py
+
+ $ export FLASK_APP=main.py
+ $ flask db
+
+To start tracking our changes, we use the init command, as follows:
+ $ flask db init
+
+This will create a new folder in our directory named migrations that will hold all of our
+history. Now we start with our first migration, as shown in the following code:
+ $ flask db migrate -m"initial migration"
+
+ To apply the migration to your database and change your schema, run the following code:
+$ flask db upgrade
+
+If we want to check out all the SQLAlchemy generated DDL code, then we use the
+following code:
+$ flask db upgrade --sql
+
+To return to the previous version, find the version number with the history command
+and pass it to the downgrade command, as follows:
+$ flask db history
+<base> -> 7ded34bc4fb (head), initial migration
+$ flask db downgrade 7ded34bc4fb
+Like Git, a hash marks each migration. 
