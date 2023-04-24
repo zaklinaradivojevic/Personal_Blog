@@ -103,5 +103,12 @@ def register():
 def logout():
     return render_template('home.html')
 
+@app.route('/table')
+def table(): 
+    result = "<h1>Tables</h1><br><ul>"
+    for table in db.metadata.tables.items():
+        result += "<li>%s</li>" % str(table)
+    result += "</ul>"
+    return result
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=1320)
