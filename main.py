@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,request
 from flask_sqlalchemy import SQLAlchemy
 from config import DevConfig
 import datetime
@@ -70,7 +70,9 @@ def __repr__(self):
 
 @app.route('/')
 def home():    
-    return render_template("home.html")
+    page = request.args.get('page', 1, type=int)
+    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
+    return render_template("home.html", posts=posts)
 
 @app.route('/about')
 def about():
@@ -80,9 +82,6 @@ def about():
 def contact():
     return render_template('contact.html')
 
-@app.route('/post/<int:post_id>')
-def post(post_id):
-    return render_template('post.html', post_id=post_id)
 
 @app.route('/new_post', methods=['GET', 'POST'])
 def new_post():
@@ -110,5 +109,6 @@ def table():
         result += "<li>%s</li>" % str(table)
     result += "</ul>"
     return result
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=1320)
