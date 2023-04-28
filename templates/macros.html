@@ -80,12 +80,12 @@
 
 {% macro render_posts(posts, pagination=True) %}
 {% if pagination %}
-    {% set _posts = posts.items %}
+    {% set  _posts = posts.items %}
 {% else %}
-    {% set _posts = posts %}
+    {% set  _posts = posts %}
 {% endif %}
 
-{% for post in _posts %}
+{% for _post in posts %}
 <div >
     <h1>
         <a class="text-dark" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a>
