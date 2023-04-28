@@ -12,6 +12,7 @@ app.config.from_object(DevConfig)
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
 class User(db.Model):
      __tablename__ = 'user_table_name'
 
@@ -19,8 +20,9 @@ class User(db.Model):
      email = db.Column(db.String(255), unique=True, nullable=False)
      username = db.Column(db.String(255), nullable=False, index=True,unique=True)
      password = db.Column(db.String(255), nullable=False)
-     posts = db.relationship('Post', backref='user',lazy='dynamic')
-      
+     #posts = db.relationship('Post', backref='user',lazy='dynamic')
+     posts = db.relationship('Post', backref='user', lazy='dynamic', primaryjoin='User.id == Post.user_id')
+ 
 def __init__(self, username):
  self.username = username
  
@@ -32,6 +34,7 @@ tags = db.Table('post_tags',
  db.Column('post_id', db.Integer, db.ForeignKey('post.id')),
  db.Column('tag_id', db.Integer, db.ForeignKey('tag.id'))
 )
+
 class Post(db.Model):
  id = db.Column(db.Integer(), primary_key=True)
  title = db.Column(db.String(255), nullable=False)
@@ -71,7 +74,8 @@ def __repr__(self):
 @app.route('/')
 def home():    
     page = request.args.get('page', 1, type=int)
-    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
+    posts = Post.query.join(User.posts).order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
+
     return render_template("home.html", posts=posts)
 
 @app.route('/about')
