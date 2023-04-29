@@ -124,7 +124,7 @@ def post(post_id):
             db.session.rollback()
         else:
             flash('Comment added', 'info')
-        return redirect(url_for('blog.post', post_id=post_id))
+        return redirect(url_for('post', post_id=post_id))
 
     post = Post.query.get_or_404(post_id)
     tags = post.tags
@@ -227,9 +227,7 @@ def contact():
     return render_template('contact.html')
 
 
-@app.route('/new_post', methods=['GET', 'POST'])
-def new_post():
-    return render_template('new_post.html')
+
     
     
 @app.route('/login', methods=['GET', 'POST'])
@@ -246,13 +244,7 @@ def register():
 def logout():
     return render_template('home.html')
 
-@app.route('/table')
-def table(): 
-    result = "<h1>Tables</h1><br><ul>"
-    for table in db.metadata.tables.items():
-        result += "<li>%s</li>" % str(table)
-    result += "</ul>"
-    return result
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=1320)
