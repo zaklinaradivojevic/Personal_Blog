@@ -12,12 +12,11 @@
   <h1>Welcome to My Blog!</h1>
  
 </header> 
-  <div class="left">
+    {% block leftbody %}
     {{ macros.render_posts(posts) }}
-    {{ macros.render_pagination(posts, 'home') }}
-  </div>
-  <div class="right">
+    {{ macros.render_pagination(posts, 'blog.home') }}
+    {% endblock %}
+   
     {% include 'rightbody.html' %}
-  </div>
 {% endblock %}
 
