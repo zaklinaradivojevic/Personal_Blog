@@ -56,3 +56,6 @@ $ flask db history
 <base> -> 7ded34bc4fb (head), initial migration
 $ flask db downgrade 7ded34bc4fb
 Like Git, a hash marks each migration. 
+
+
+

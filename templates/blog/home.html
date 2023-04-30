@@ -12,6 +12,7 @@
   <h1>Welcome to My Blog!</h1>
  
 </header> 
+    {% include 'messages.html' %}
     {% block leftbody %}
     {{ macros.render_posts(posts) }}
     {{ macros.render_pagination(posts, 'blog.home') }}
