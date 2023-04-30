@@ -91,13 +91,8 @@ def sidebar_data():
     return recent, top_tags
 
 @app.route('/')
-def home():    
-    return render_template("home.html")
-
-
-@app.route('/<int:page>')
-def home(page=1):
-    posts = Post.query.order_by(Post.publish_date.desc()).paginate(page, app.config.get('POSTS_PER_PAGE', 10), False)
+def home():
+    posts = Post.query.order_by(Post.publish_date.desc()).paginate()
     recent, top_tags = sidebar_data()
 
     return render_template(
@@ -106,6 +101,7 @@ def home(page=1):
         recent=recent,
         top_tags=top_tags
     )
+
     
 @app.route('/post/<int:post_id>', methods=('GET', 'POST'))
 def post(post_id):
@@ -222,14 +218,7 @@ def before_request():
 def about():
     return render_template('about.html')
 
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
-
-
-
-    
-    
+ 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     return render_template('login.html')
