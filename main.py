@@ -106,7 +106,7 @@ def sidebar_data():
 
 @app.route('/')
 def index():
-    return redirect(url_for('home'))
+    return redirect(url_for('blog.home'))
 
 
 @blog_blueprint.route('/')
