@@ -1,4 +1,4 @@
- import logging
+import logging
 from main import db
 from main import User, Post, Tag
 import random
