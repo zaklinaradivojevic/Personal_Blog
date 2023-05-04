@@ -112,9 +112,7 @@ def index():
 @blog_blueprint.route('/')
 @blog_blueprint.route('/<int:page>')
 def home(page=1):
-    posts_per_page = 10
-    page_number = page
-    posts = Post.query.order_by(Post.publish_date.desc()).paginate(page_number, per_page=posts_per_page)
+    posts = Post.query.order_by(Post.publish_date.desc()).paginate(page, app.config.get('POSTS_PER_PAGE', 10), False)
     recent, top_tags = sidebar_data()
 
     return render_template(
@@ -240,6 +238,8 @@ def page_not_found(error):
 @app.before_request
 def before_request():
     session['page_loads'] = session.get('page_loads', 0) + 1
+
+
 
 @app.route('/about')
 def about():
