@@ -104,6 +104,7 @@ def sidebar_data():
     return recent, top_tags
 
 
+
 @app.route('/')
 def index():
     return redirect(url_for('blog.home'))
